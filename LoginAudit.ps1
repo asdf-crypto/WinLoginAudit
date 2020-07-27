@@ -121,6 +121,9 @@ $ip = Test-Connection -ComputerName (hostname) -Count 1  | Select -ExpandPropert
 # convert IP address to string
 $ip = $ip.IPAddressToString
 
+#tls
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 #output the results to Telegram using an HTTP GET request
 curl "https://api.telegram.org/bot$tokenID/sendMessage?chat_id=$chatID&parse_mode=Markdown&text=*System Login Activity* %0A*$env:COMPUTERNAME* : $ip $result"
  
